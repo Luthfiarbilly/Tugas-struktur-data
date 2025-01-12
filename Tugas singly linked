@@ -1,0 +1,71 @@
+// Definisi kelas Node
+class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+  
+  // Definisi kelas LinkedList
+  class LinkedList {
+    constructor() {
+      this.head = null;
+    }
+  
+    // Menambahkan elemen ke akhir list
+    append(data) {
+      const newNode = new Node(data);
+      if (!this.head) {
+        this.head = newNode;
+        return;
+      }
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+  
+    // Mencetak seluruh elemen dalam linked list
+    print() {
+      let current = this.head;
+      let result = '';
+      while (current) {
+        result += current.data + ' -> ';
+        current = current.next;
+      }
+      console.log(result.slice(0, -4)); // Menghapus " -> " di akhir
+    }
+  
+    // Membalikkan urutan linked list
+    reverse() {
+      let prev = null;
+      let current = this.head;
+      let next = null;
+  
+      while (current !== null) {
+        next = current.next; // Simpan node berikutnya
+        current.next = prev; // Balikkan pointer
+        prev = current; // Pindahkan prev dan current satu langkah
+        current = next;
+      }
+      this.head = prev; // Set head menjadi node terakhir yang diproses
+    }
+  }
+  
+  // Contoh penggunaan
+  let list = new LinkedList();
+  list.append(10);
+  list.append(20);
+  list.append(30);
+  list.append(40);
+  
+  console.log('Linked List sebelum reverse:');
+  list.print(); // Output: 10 -> 20 -> 30 -> 40
+  
+  list.reverse(); // Membalikkan linked list
+  
+  console.log('Linked List setelah reverse:');
+  list.print(); // Output: 40 -> 30 -> 20 -> 10
+  
+  
